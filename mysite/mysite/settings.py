@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -24,9 +26,9 @@ TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 'django-insecure-590gg=h2e8rgaj7xfya6!v%u7bejo=t*h4e2nmbtxza=62*^-q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mrmapp.herokuapp.com']
 
 
 # Application definition
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -125,3 +128,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Activate Django-Heroku.
+django_heroku.settings(locals())
